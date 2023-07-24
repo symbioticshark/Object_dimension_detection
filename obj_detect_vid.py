@@ -22,7 +22,7 @@ def ResizeWithAspectRatio(image, width=None, height=None, inter=cv2.INTER_AREA):
     return cv2.resize(image, dim, interpolation=inter)
 # define a video capture object
 vid = cv2.VideoCapture(0)
-#vid = cv2.VideoCapture('shapesTestFinal.mp4')
+#vid = cv2.VideoCapture('vid_path.mp4')
 frame_width = int(vid.get(3))
 frame_height = int(vid.get(4))
    
@@ -31,9 +31,11 @@ size = (frame_width, frame_height)
 # Below VideoWriter object will create
 # a frame of above defined The output 
 # is stored in 'filename.avi' file.
-#result = cv2.VideoWriter('shapesTestOp.mp4', 
+#result = cv2.VideoWriter('OP_Path', 
 #                         cv2.VideoWriter_fourcc(*'MP4V'),
 #                         60, size)
+
+# Press 'q' to quit the live feed from the camera or video
 while(True):
     start = timer()
     if cv2.waitKey(1) & 0xFF == ord('q'):
@@ -45,21 +47,11 @@ while(True):
     if not ret:
         print("Can't receive frame (stream end?). Exiting ...")
         break
-    #img_grey = cv2.cvtColor(img,cv2.COLOR_BGR2GRAY)
-    #img_edges = cv2.Canny(img,100,200)
-    #img_edges = ResizeWithAspectRatio(img_edges,height=1000)
-    #cv2.imshow('',img_edges)
-    #cv2.waitKey(0)
     
     dictionary = cv2.aruco.getPredefinedDictionary(cv2.aruco.DICT_5X5_250)
 
     parameters =  cv2.aruco.DetectorParameters()
     detector = cv2.aruco.ArucoDetector(dictionary, parameters)
-
-    # Load the image
-   
-
-
     # Detect ArUco markers
     markerCorners, markerIds, rejectedCandidates = cv2.aruco.detectMarkers(img, dictionary, parameters=parameters)
 
@@ -101,12 +93,7 @@ while(True):
     # Aruco Perimeter
     aruco_perimeter = cv2.arcLength(markerCorners[0], True)
     #print(aruco_perimeter)
-
-    image_edges = cv2.Canny(img, 0,255)
-
-
-
-
+   
     # Pixel to mm ratio
     pixel_mm_ratio = aruco_perimeter / 100.9
 
@@ -170,7 +157,7 @@ while(True):
     
         
     
-# After the loop release the cap object
+# After the loop release the cam object
 print(sum/count)
 vid.release()
 #result.release()
