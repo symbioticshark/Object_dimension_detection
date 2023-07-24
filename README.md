@@ -10,4 +10,5 @@ Camera Calibration is not used in this software as the images are taken perpendi
 An implementation provided in the `obj_detect_vid.py` which can be used to detect object dimensions in a video or live stream from a camera. The video is processed frame by frame. This software can process upto 25 frames per second , fps can be improved with better hardware acceleration or higher graphical computation mechanisms.
 
 ### Requirements
-OpenCv (ver 4.7.0)
+- OpenCv (ver 4.7.0)
+- Numpy
