@@ -23,13 +23,9 @@ parameters =  cv2.aruco.DetectorParameters()
 detector = cv2.aruco.ArucoDetector(dictionary, parameters)
 
 # Load the image
-img = cv2.imread("shapesTest6.jpg")
+# Change the Path of the input image
+img = cv2.imread("input_image.jpg")
 img_grey = cv2.cvtColor(img,cv2.COLOR_BGR2GRAY)
-#img_edges = cv2.Canny(img,100,200)
-#img_edges = ResizeWithAspectRatio(img_edges,height=1000)
-#cv2.imshow('',img_edges)
-#cv2.waitKey(0)
-
 
 # Detect ArUco markers
 markerCorners, markerIds, rejectedCandidates = cv2.aruco.detectMarkers(img, dictionary, parameters=parameters)
@@ -75,7 +71,8 @@ image_edges = cv2.Canny(img, 0,255)
 
 
 # Pixel to mm ratio
-pixel_mm_ratio = aruco_perimeter / 101
+# Insert the actual perimter in millimter of the marker at #mm
+pixel_mm_ratio = aruco_perimeter / #mm
 
 # Draw contours on an empty image
 '''
@@ -100,6 +97,7 @@ img_contours = np.zeros(img.shape)
 cv2.drawContours(img_contours, objects_contours, -1, (0,255,0), 3)
 (thresh, binRed) = cv2.threshold(img_grey, 50, 255, cv2.THRESH_BINARY)
 '''
+
 img_contours= img
 detector = ob.HomogeneousBgDetector()
 contours = detector.detect_objects(img)
@@ -146,4 +144,5 @@ for  i,cnt in enumerate(contours):
 
 cv2.imshow("",img)
 cv2.waitKey(0)
-cv2.imwrite('C:/Users/mnvsk/OneDrive/Pictures/Camera Roll/ShapesOp.jpg',img)
+# Path of the output image
+cv2.imwrite('output_image',img)
